@@ -6,6 +6,8 @@
 #define x_max 8
 #define y_min 0
 #define y_max 8
+#define x_start 5
+#define y_start 5
 
 int x ,y;
 struct imove
@@ -71,8 +73,6 @@ bool checkNext(std::string prefix)
 
 int main() {
 
-    x = 0;
-    y = 0;
     passed = 0;
     for (int i = 0 ; i < x_max ; i++)
     {
@@ -94,14 +94,18 @@ int main() {
 //    moves.push_back(imove{.x = 0, .y = -1});
 
     bool found = false;
-    for (int i = 0 ; i < x_max ; i++)
+    for (int i = 0 ; i != x_max ; i++)
     {
         if(found ) break;
         for (int j = 0 ; j < y_max ; j++)
         {
             std::string pre = "";
             passed = 1;
-            path.push_back(imove{.x=i, .y=j});
+
+            x = (i+x_start)%x_max;
+            y = (j+y_start)%y_max;
+            path.push_back(imove{.x=x ,
+                                 .y=y});
             if(checkNext(pre) == true)
             {
                 std::cout << "passed \n";
